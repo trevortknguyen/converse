@@ -23,7 +23,7 @@
             webSocket = new WebSocket("ws://0.0.0.0:9160",);
             document.getElementById("username_submit").onclick = function(){
                 username_text = document.getElementById("username").value
-                document.getElementById("username_setup").style.visibility = "hidden"
+                document.getElementById("username_setup").style.display = "none"
                 webSocket.send("Hi! I am " + username_text)
                 console.log("submit username: " + username_text);
             }
