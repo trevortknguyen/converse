@@ -12,6 +12,8 @@ import qualified Data.ByteString.Lazy as BS (readFile)
 
 import Data.Text.Lazy.Encoding (decodeUtf8)
 
+import ChatServer
+
 getWebpage :: ActionM Text
 getWebpage = do
     content <- liftIO $ BS.readFile "html/index.html"
