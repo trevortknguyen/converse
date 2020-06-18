@@ -9,12 +9,11 @@ executable converse
   main-is:             Main.hs
   hs-source-dirs:      src
   other-modules:       ChatServer
-                       , HtmlWebpage
+                       , Webserver
                        , Types
   build-depends:       base >=4.13 && <4.14
                        , scotty
                        , text
-                       , bytestring
                        , websockets
                        , wai
                        , wai-websockets
