@@ -16,5 +16,8 @@ executable converse
                        , text
                        , bytestring
                        , websockets
+                       , wai
+                       , wai-websockets
+                       , warp
                        , aeson
   default-language:    Haskell2010

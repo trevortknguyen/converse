@@ -1,10 +1,6 @@
 # Converse
 Right now, it's a simple webapp that has a websockets chat!
 
-Note: Deploying to Heroku has the limitation of being able only use one port. Until I figure out
-how to make WebSockets and Scotty use the same WAI/Warp server to have only one port listener, the
-websockets thing doesn't work. I'm still putting this here because it's useful.
-
 The build situation isn't fully reproducible anywhere, but I'll document how I build on my Ubuntu system.
 A huge disclaimer is this is for hobbyists who want a build experience with a little bit of
 reproducibility, but lack the resources and/or interest to have remote builds integrated into CI systems.

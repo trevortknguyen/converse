@@ -2,6 +2,10 @@
 module Main where
 
 import Web.Scotty
+import qualified Network.Wai as Wai
+import qualified Network.Wai.Handler.WebSockets as WaiWs
+import qualified Network.Wai.Handler.Warp as Warp
+import qualified Network.WebSockets as WS
 
 import System.Environment (lookupEnv)
 
@@ -16,12 +20,16 @@ getPort = do
     mPort <- lookupEnv "PORT"
     return $ fromMaybe 3000 (read <$> mPort)
 
+scottyApplication :: IO Wai.Application
+scottyApplication = 
+    scottyApp $ do
+        get "/" $
+            file "html/index.html"
+
 main :: IO ()
 main = do 
-    -- listening on the same port is not possible
-    startServer 9160
     port <- getPort
-    scotty port $
-        get "/" $ do
-            page <- getWebpage
-            html page
+    let settings = Warp.setPort port Warp.defaultSettings
+    wsapp <- serverApp
+    sapp <- scottyApplication
+    Warp.runSettings settings $ WaiWs.websocketsOr WS.defaultConnectionOptions wsapp sapp

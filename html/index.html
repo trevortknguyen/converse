@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Converse</title>
+        <meta charset="UTF-8">
     </head>
     <body>
        <h1>Converse</h1>
@@ -26,7 +27,14 @@
             } else {
                 wsProtocol = "ws://"
             };
-            webSocket = new WebSocket(wsProtocol + window.location.hostname + ":9160",);
+
+            if (window.location.hostname == "localhost") {
+                portAppend = ":3000"
+            } else {
+                portAppend = ""
+            }
+
+            webSocket = new WebSocket(wsProtocol + window.location.hostname + portAppend,);
             document.getElementById("username_submit").onclick = function(){
                 username_text = document.getElementById("username").value
                 document.getElementById("username_setup").style.display = "none"
