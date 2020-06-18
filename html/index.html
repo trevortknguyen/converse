@@ -4,9 +4,42 @@
         <title>Converse</title>
     </head>
     <body>
-        <h1>Converse</h1>
-        <div>
+       <h1>Converse</h1>
+        <div id="username_setup">
+            <h2>Username setup</h2>
+            <p>choose something without spaces or anything</p>
+            <input type="text" id="username" placeholder="username"></input>
+            <button type="submit" id="username_submit">Submit</button>
+        </div>
+        <div id="messages">
             
         </div>
+        <div>
+            <p>type a message</p>
+            <input type="text" id="message" placeholder="a funny message"></input>
+            <button type="submit" id="message_submit">Send</button>
+        </div>
+        <script>
+            webSocket = new WebSocket("ws://0.0.0.0:9160",);
+            document.getElementById("username_submit").onclick = function(){
+                username_text = document.getElementById("username").value
+                document.getElementById("username_setup").style.visibility = "hidden"
+                webSocket.send("Hi! I am " + username_text)
+                console.log("submit username: " + username_text);
+            }
+            document.getElementById("message_submit").onclick = function(){
+                message_text = document.getElementById("message").value
+                webSocket.send(message_text)
+                console.log("submit message");
+            }
+            
+            webSocket.onmessage = function (event) {
+                console.log(event.data);
+                msg = document.createElement('p');
+                msg.appendChild(document.createTextNode(event.data))
+                document.getElementById("messages").appendChild(msg)
+            }
+
+        </script>
     </body>
 </html>
