@@ -9,6 +9,7 @@ executable converse
   main-is:             Main.hs
   hs-source-dirs:      src
   other-modules:       ChatServer
+                       , HtmlWebpage
   build-depends:       base >=4.13 && <4.14
                        , scotty
                        , text
