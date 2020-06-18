@@ -15,10 +15,9 @@
         <div id="messages">
             
         </div>
-        <div>
+        <div id="message_container" style="display:none">
             <p>type a message</p>
-            <input type="text" id="message" placeholder="a funny message"></input>
-            <button type="submit" id="message_submit">Send</button>
+            <input type="text" id="message" placeholder="press enter to send"></input>
         </div>
         <script>
 
@@ -40,17 +39,23 @@
                 document.getElementById("username_setup").style.display = "none"
                 webSocket.send("Hi! I am " + username_text)
                 console.log("submit username: " + username_text);
+                document.getElementById("message_container").style.display = "block"
             }
-            document.getElementById("message_submit").onclick = function(){
-                message_text = document.getElementById("message").value
-                webSocket.send(message_text)
-                console.log("submit message");
-            }
-            
+            document.getElementById("message").addEventListener('keydown', function(e){
+                console.log(e.keyCode)
+                if (e.keyCode == 13) { // 13 is enter
+                    message_text = document.getElementById("message").value
+                    document.getElementById("message").value = ""
+                    webSocket.send(message_text)
+                    console.log("submit message");
+                }
+            })
             webSocket.onmessage = function (event) {
                 console.log(event.data);
                 msg = document.createElement('p');
-                msg.appendChild(document.createTextNode(event.data))
+                msg_text = document.createElement('tt');
+                msg_text.appendChild(document.createTextNode(event.data))
+                msg.appendChild(msg_text)
                 document.getElementById("messages").appendChild(msg)
             }
 
