@@ -38,10 +38,10 @@ broadcast message clients = do
     T.putStrLn message
     forM_ clients $ \(_, conn) -> WS.sendTextData conn message
 
-startServer :: IO ()
-startServer = do
+startServer :: Int -> IO ()
+startServer port = do
     state <- newMVar newServerState
-    void $ forkIO $ WS.runServer "0.0.0.0" 9160 $ application state
+    void $ forkIO $ WS.runServer "0.0.0.0" port $ application state
 
 application :: MVar ServerState -> WS.ServerApp
 application state pending = do
