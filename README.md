@@ -86,5 +86,13 @@ And release!
 heroku container:release --app $APP_NAME web
 ```
 
+## Acknowledgements
 
+The Scotty tutorial was pretty helpful. I recommend it starting out with Haskell web development
+especially if you're not aware of (or don't have any) business requirements that would guide you
+toward a different framework.
+
+The Websockets server was basically copied from the Haskell Websockets tutorial.
+
+The Scotty + Websockets was based off of [this one gist](https://gist.github.com/andrevdm/9560b5e31933391694811bf22e25c312).
 
